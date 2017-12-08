@@ -36,6 +36,7 @@ public class disparo : MonoBehaviour {
 
 			//balaInstance.velocity = fuerzaDisparo * puntoDisparo.forward;
 			balaInstance.AddForce(puntoDisparo.forward * fuerzaDisparo,ForceMode.Impulse);
+			rigidbody.AddForce(transform.forward * fuerzaDisparo,ForceMode.Impulse);
 		}
 
 	}
