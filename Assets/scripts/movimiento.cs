@@ -7,11 +7,11 @@ public class movimiento : MonoBehaviour {
 	private float gravity = 20.0f;
 	private float jumpForce = 4.0f;
 	public float speed = 6.0F;
-
 	CharacterController controller;
 	Rigidbody rigidbody;
 	Transform transform;
-
+bool candoublejump;
+int Jumpcount;
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController> ();
@@ -21,15 +21,27 @@ public class movimiento : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (controller.isGrounded) {
+		if (controller.isGrounded ) {
+			Jumpcount=0;
 			verticalVelocity = -gravity * Time.deltaTime;
 			if (Input.GetKeyDown (KeyCode.Space)) {
+				Jumpcount++;
 				verticalVelocity = jumpForce;
 			}
 		} else {
+			if(Jumpcount<2){
+				if (Input.GetKeyDown (KeyCode.Space)) {
+					Jumpcount++;
+					verticalVelocity = jumpForce;
+				}
+			}
 			verticalVelocity -= gravity * Time.deltaTime;
 
 		}
+
+ 
+
+
 		Vector3 moveVector = Vector3.zero;
 		moveVector.x = -Input.GetAxis ("Horizontal");
 		moveVector.y = verticalVelocity;
